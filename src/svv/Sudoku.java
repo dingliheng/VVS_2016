@@ -115,6 +115,25 @@ public class Sudoku extends JFrame {
         }
     }
 
+    public void makeMove(int row, int col, int number) {
+        tfCells[row][col].setText(String.valueOf(number));
+    }
+
+    public int getWinner() {
+        for(int i=0;i<9;i++) {
+            for(int j=0;j<9;j++) {
+                if(tfCells[i][j].getText().equals("")) {
+                    return 0;
+                }
+            }
+        }
+        if(isValid()) {
+            return 1;
+        }else {
+            return 2;
+        }
+    }
+
     /**
      * The entry main() entry method
      */
@@ -182,4 +201,3 @@ public class Sudoku extends JFrame {
         }
     }
 }
-

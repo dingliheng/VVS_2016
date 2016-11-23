@@ -1,6 +1,6 @@
 package svv;
 
-import java.awt.*;
+import java.awt.Point;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,10 +12,8 @@ public class CellCoverage {
 	
 	CellCoverage(BoardState bs){
 		visited = new HashSet<Cell>();
-		//allstate = bs.rows * bs.cols * bs.statePerCell;
 		int numOfSlot = bs.getEmptyCells().size();
 		allstate = numOfSlot * bs.statePerCell;
-
 	}
 	
 	public void update(BoardState bs){
@@ -27,9 +25,6 @@ public class CellCoverage {
 	}
 	
 	public float getCoverage(){
-		if(allstate == 0){
-			return -1;
-		}
 		return (float) curVisited / allstate;
 	}
 	

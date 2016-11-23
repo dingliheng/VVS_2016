@@ -82,7 +82,7 @@ public class SudokuTester extends BoardState{
 			}
 		}
 		if(!isValid()) {
-			return Winner.Neither;
+			return Winner.Second;
 		}else {
 			return Winner.First;
 		}
@@ -117,6 +117,16 @@ public class SudokuTester extends BoardState{
 		for (int i=1;i<=9;i++) {
 			set.add(states[i-1]);
 		}
+		for (int i=0; i<9; i++) {
+			for (int j=0; j<9; j++) {
+				if (matrix.get(new Point(i,j)).getState()==cellState.Empty) {
+					for (int k=0; k<9; k++) {
+						res.add(new Move(turn,new Cell(i, j, states[k])));
+					}
+				}
+			}
+		}
+		/*
 		for(int i = 0; i<9; i++){
 			for (int j = 0; j < 9;j++){
 				//if(myBoard[i][j].getText().equals("")) {
@@ -155,7 +165,7 @@ public class SudokuTester extends BoardState{
 					}
 				}
 			}
-		}
+		}*/
 		return res;
 	}
 

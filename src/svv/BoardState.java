@@ -22,7 +22,6 @@ public abstract class BoardState {
 	public HashMap<Point, Cell> matrix = genEmptyBoard();
 	
 	public abstract boolean isValid();
-
 	
 	public abstract Winner getWinner();
 	
