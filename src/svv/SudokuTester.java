@@ -95,6 +95,16 @@ public class SudokuTester extends BoardState{
 		//  with various difficulty levels.
 		//SudokuTester res = new SudokuTester();
 		//res.initBoardConstant();
+		for (int i=0; i<9 ; i++) {
+			for(int j=0; j<9; j++) {
+				String content = myBoard[i][j].getText();
+				if (content.equals("")){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Empty));
+				}else {
+					matrix.put(new Point(i,j),new Cell(i,j, states[Integer.parseInt(content)-1]));
+				}
+			}
+		}
 		return this;
 	}
 

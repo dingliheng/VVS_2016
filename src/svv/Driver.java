@@ -76,6 +76,7 @@ public class Driver {
 				passCases += 1;
 			}
 		}
+		//System.out.println(passCases / totalCases);
 		return passCases / totalCases;
 		
 	}
