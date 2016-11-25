@@ -42,6 +42,8 @@ public abstract class BoardState {
 	public boolean cmp(BoardState otherBoard){
 		for(Point cur:matrix.keySet()){
 			if(!matrix.get(cur).cmp(otherBoard.matrix.get(cur))){
+				Cell cell = matrix.get(cur);
+				Cell cell1 = otherBoard.matrix.get(cur);
 				return false;
 			}
 		}

@@ -2,6 +2,7 @@ package svv;
 
 import java.awt.*;        // Uses AWT's Layout Managers
 import java.awt.event.*;  // Uses AWT's Event Handlers
+import java.util.HashSet;
 import javax.swing.*;     // Uses Swing's Container/Components
 
 /**
@@ -120,18 +121,40 @@ public class Sudoku extends JFrame {
     }
 
     public int getWinner() {
-        for(int i=0;i<9;i++) {
-            for(int j=0;j<9;j++) {
-                if(tfCells[i][j].getText().equals("")) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (tfCells[i][j].getText().equals("")) {
                     return 0;
                 }
             }
         }
-        if(isValid()) {
-            return 1;
-        }else {
-            return 2;
+//        if(isValid()) {
+//            return 1;
+//        }else {
+//            return 2;
+//        }
+        for (int i = 0; i < 9; i++) {
+            HashSet<Integer> rows = new HashSet<>();
+            HashSet<Integer> columns = new HashSet<>();
+            HashSet<Integer> cube = new HashSet<>();
+            for (int j = 0; j < 9; j++) {
+                int num = Integer.parseInt(tfCells[i][j].getText());
+                if (num < 0 || num > 9) return 2;
+                if (!rows.add(num)) return 2;
+                num = Integer.parseInt(tfCells[j][i].getText());
+                if (num < 0 || num > 9) return 2;
+                if (!columns.add(num)) return 2;
+                int RowIndex = 3 * (i / 3);
+                int ColIndex = 3 * (i % 3);
+                if ((!tfCells[RowIndex + j / 3][ColIndex + j % 3].getText().equals(""))) {
+                    num = Integer.parseInt(tfCells[RowIndex + j / 3][ColIndex + j % 3].getText());
+                    if (num < 0 || num > 9) return 2;
+                    if (!cube.add(num))
+                        return 2;
+                }
+            }
         }
+        return 1;
     }
 
     /**

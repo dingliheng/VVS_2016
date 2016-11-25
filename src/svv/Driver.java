@@ -66,6 +66,8 @@ public class Driver {
 				totalCases += 1;
 				if(cur.cmp(gs.getBoard())){
 					passCases += 1;
+				}else {
+					passCases += 0;
 				}
 				
 				cc.update(cur);
@@ -74,6 +76,10 @@ public class Driver {
 			totalCases += 1;
 			if(cur.getWinner() == gs.getWinner()){
 				passCases += 1;
+			}else {
+				Winner winner = cur.getWinner();
+				Winner winner1 = gs.getWinner();
+				passCases += 0;
 			}
 		}
 		//System.out.println(passCases / totalCases);
@@ -86,7 +92,10 @@ public class Driver {
 		//String path = "./";
 		//genTests(path, new TicTacToeTester().getInitState());
 	    
-		float testScore = runTests(new SudokuSocket(new SudokuTester()), new SudokuTester());
+//		float testScore = runTests(new SudokuSocket(new SudokuTester()), new SudokuTester());
+//		System.out.println(testScore);
+
+		float testScore = runTests(new TicTacToeSocket('2','x','y'), new TicTacToeTester('2','x','y'));
 		System.out.println(testScore);
 	}
 	
