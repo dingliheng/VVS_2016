@@ -130,6 +130,18 @@ public class TicTacToe_dual
 
   public static void resetBoard()
   {
+	  
+	  if(userSymbol=='x'){
+			userSymbol = 'o';
+			compSymbol = 'x';
+		}  else {
+			userSymbol = 'x';
+			compSymbol = 'o';
+		}
+	  
+	    
+	  
+	  
     for (int i = 0; i < board[0].length; i++)
       for (int j = 0; j < board[0].length; j++)
         board[i][j] = ' ';
