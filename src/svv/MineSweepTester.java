@@ -16,13 +16,19 @@ import svv.GameConstant.cellState;
 public class MineSweepTester extends BoardState implements Configs{
 
 
+    int[][] map;
+    /**
+     * 检测某点周围是否有雷，周围点的坐标可由该数组计算得到
+     */
+    private int[][] mv = { { -1, 0 }, { -1, 1 }, { 0, 1 }, { 1, 1 }, { 1, 0 },
+            { 1, -1 }, { 0, -1 }, { -1, -1 } };
 
 	public static MineSweeper mineSweeper;
 	public JButton[][] jb1;
 	public int[][] map1;
-	public cellState[] states = {cellState.One,cellState.Two,cellState.Zero};
-	public MineSweepTester(){
-		mineSweeper = new MineSweeper("Hello Miner");
+	public cellState[] states = {cellState.Empty,cellState.One,cellState.Three,cellState.Flag,cellState.Mine};
+	public MineSweepTester(MineSweeper _mineSweeper){
+		mineSweeper = _mineSweeper;
 //		jb1 = mineSweeper.jb;
 		map1 = mineSweeper.map;
 		for(int i = 0; i < MINE_SIZE; i++){
@@ -95,6 +101,11 @@ public class MineSweepTester extends BoardState implements Configs{
 		w = Winner.Neither;
 		return this;
 	}
+
+	@Override
+    public void makeMove(Move move) throws Exception {
+
+    }
 
 	@Override
 	public List<Move> getPossibleMove() {
