@@ -98,12 +98,12 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
         jl = new JLabel();
         showTime = new JLabel();
         map = new int[MINE_SIZE][MINE_SIZE]; // 将按钮映射到数组中
+        init();
+        run();
     }
 
     public static void main(String[] args) {
         MineSweeper test = new MineSweeper("Hello Miner!");
-        test.init();
-        test.run();
     }
 
     @Override

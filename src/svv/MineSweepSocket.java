@@ -37,7 +37,7 @@ public class MineSweepSocket implements GameSocket,Configs{
 		GameConstant.cellState state = m.update.getState();
 		mineSweepTester.matrix.get(new Point(r,l)).setState(state);
 
-		for (int i=0;i<=12;i++) {
+		for (int i=0;i<mineSweepTester.states.length;i++) {
 			if( state == mineSweepTester.states[i]) {
 				MineSweepTester.mineSweeper.jb[r][l].setText(String.valueOf(i));
 				break;

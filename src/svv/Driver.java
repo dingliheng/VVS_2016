@@ -82,7 +82,7 @@ public class Driver {
 				passCases += 0;
 			}
 		}
-		//System.out.println(passCases / totalCases);
+		System.out.println(passCases / totalCases);
 		return passCases / totalCases;
 		
 	}
@@ -95,7 +95,10 @@ public class Driver {
 //		float testScore = runTests(new SudokuSocket(new SudokuTester()), new SudokuTester());
 //		System.out.println(testScore);
 
-		float testScore = runTests(new TicTacToeSocket('2','x','y'), new TicTacToeTester('2','x','y'));
+//		float testScore = runTests(new TicTacToeSocket('2','x','y'), new TicTacToeTester('2','x','y'));
+//		System.out.println(testScore);
+
+		float testScore = runTests(new MineSweepSocket(), new MineSweepTester());
 		System.out.println(testScore);
 	}
 	
