@@ -8,8 +8,8 @@ public class TicTacToe_dual
 {
   public static Scanner sc = new Scanner(System.in);
   public int turn;
-  public char userSymbol;
-  public char compSymbol;
+  public static char userSymbol;
+  public static char compSymbol;
   public static char numberOfplayer;
   public char ans;
   public static int remainCount;
