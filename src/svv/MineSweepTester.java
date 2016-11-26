@@ -81,8 +81,8 @@ public class MineSweepTester extends BoardState implements Configs{
 
 	@Override
 	public Winner getWinner() {
-		for(int i=0;i<9;i++) {
-			for(int j=0;j<9;j++) {
+		for(int i=0;i<MINE_SIZE;i++) {
+			for(int j=0;j<MINE_SIZE;j++) {
 
 				if (matrix.get(new Point(i,j)).getState()==cellState.Nine) {
 					return Winner.Second;
