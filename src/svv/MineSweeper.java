@@ -4,15 +4,20 @@ package svv;
  * Created by sudan on 2016/11/25.
  */
 
-        import java.awt.event.ActionEvent;
-        import java.awt.event.ActionListener;
-        import java.awt.event.MouseEvent;
-        import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-        import javax.swing.JButton;
-        import javax.swing.JFrame;
-        import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
+
+/**
+ *
+ * @author
+ */
 public class MineSweeper extends JFrame implements ActionListener, Runnable,
         MouseListener, Configs {
 
@@ -22,7 +27,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
     JButton[][] jb;
     private JLabel jl;
     JLabel showTime;
-    private int[][] map;
+    int[][] map;
 
     /**
      * 检测某点周围是否有雷，周围点的坐标可由该数组计算得到
@@ -98,12 +103,12 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
         jl = new JLabel();
         showTime = new JLabel();
         map = new int[MINE_SIZE][MINE_SIZE]; // 将按钮映射到数组中
-        init();
-        run();
     }
 
     public static void main(String[] args) {
         MineSweeper test = new MineSweeper("Hello Miner!");
+        test.init();
+        test.run();
     }
 
     @Override
@@ -127,7 +132,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
             return;
         }
 
-        dfs(x, y, 0);
+        dfs(x, y);
 
         checkSuccess();
     }
@@ -154,7 +159,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
         }
     }
 
-    public int dfs(int x, int y, int d) {
+    public int dfs(int x, int y) {
         map[x][y] = CHECKED;
         int i, tx, ty, cnt = 0; //cnt是已经checked的点的附近八个格子的雷数目
         for (i = 0; i < 8; i++) {
@@ -177,7 +182,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
                 ty = y + mv[i][1];
                 if (tx >= 0 && tx < MINE_SIZE && ty >= 0 && ty < MINE_SIZE
                         && map[tx][ty] != CHECKED) {
-                    dfs(tx, ty, d + 1);
+                    dfs(tx, ty);
                 }
             }
         } else {
@@ -226,16 +231,16 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
         }
     }
 
-    public void makeMove(int row, int col, String number){
-        jb[row][col].setText(String.valueOf(number));
+    public void makeMove(int row, int col, String status){
+        jb[row][col].setText(String.valueOf(status));
     }
 
     public int getWinner(){
         for(int i = 0; i < MINE_SIZE; i++){
             for(int j = 0; j < MINE_SIZE; j++){
-                if(jb[i][j].getText().equals("mine")){
+                if(map[i][j] == 1){
                     return 2;
-                }else if(jb[i][j].isEnabled()){
+                }else if(map[i][j] == 0){
                     return 0;
                 }
             }
@@ -290,4 +295,3 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
 
     }
 }
-

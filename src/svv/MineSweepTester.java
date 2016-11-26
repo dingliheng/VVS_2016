@@ -15,44 +15,26 @@ import svv.GameConstant.cellState;
 
 public class MineSweepTester extends BoardState implements Configs{
 
-//111
+
+
 	public static MineSweeper mineSweeper;
 	public JButton[][] jb1;
-	public cellState[] states = {cellState.One,cellState.Two,cellState.Three,cellState.Four,cellState.Five,cellState.Six,cellState.Seven,cellState.Eight,cellState.Nine,cellState.Flag,cellState.Zero,cellState.Empty};
-
+	public int[][] map1;
+	public cellState[] states = {cellState.One,cellState.Two,cellState.Zero};
 	public MineSweepTester(){
 		mineSweeper = new MineSweeper("Hello Miner");
-		jb1 = mineSweeper.jb;
+//		jb1 = mineSweeper.jb;
+		map1 = mineSweeper.map;
 		for(int i = 0; i < MINE_SIZE; i++){
 			for(int j = 0; j < MINE_SIZE; j++){
-				String s = jb[i][j].getText();
-//				System.out.println(jb[i][j].getText());
-//				System.out.println("OK");
-				if(s.equals("")){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Empty));
-				}else if(s.equals("mine")){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Nine));
-				}else if(s.equals("0")){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Zero));
-				}else if(s.equals("1")){
+				if(map1[i][j] == 1){
 					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.One));
-				}else if(s.equals("2")){
+				}else if(map1[i][j] == 2){
 					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Two));
-				}else if(s.equals("3")){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Three));
-				}else if(s.equals("4")){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Four));
-				}else if(s.equals("5")){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Five));
-				}else if(s.equals("6")){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Six));
-				}else if(s.equals("7")){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Seven));
-				}else if(s.equals("8")){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Eight));
-				}else if(s.equals("flag")){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Flag));
+				}else if(map1[i][j] == 0){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Zero));
 				}
+
 			}
 		}
 	}
@@ -61,13 +43,12 @@ public class MineSweepTester extends BoardState implements Configs{
 	@Override
 	public boolean isValid() {
 		int count = 0;
-		int d = 0;
 		for(int i = 0; i < MINE_SIZE; i++){
 			for(int j = 0; j < MINE_SIZE; j++){
-				if(map[i][j] == MINE){
+				if(map1[i][j] == 1){
 					count++;
 				}
-				if(jb[i][j].getText() != Integer.toString(mineSweeper.dfs(i, j, d++))){
+				if(map1[i][j] == 2 && jb1[i][j].isEnabled()){
 					return false;
 				}
 			}
@@ -84,9 +65,9 @@ public class MineSweepTester extends BoardState implements Configs{
 		for(int i=0;i<MINE_SIZE;i++) {
 			for(int j=0;j<MINE_SIZE;j++) {
 
-				if (matrix.get(new Point(i,j)).getState()==cellState.Nine) {
+				if (matrix.get(new Point(i,j)).getState()==cellState.One) {
 					return Winner.Second;
-				}else if(jb[i][j].isEnabled()){
+				}else if(matrix.get(new Point(i,j)).getState()==cellState.Zero){
 					return Winner.Neither;
 				}
 			}
@@ -107,10 +88,10 @@ public class MineSweepTester extends BoardState implements Configs{
 	@Override
 	public BoardState initBoardConstant() {
 		// TODO Auto-generated method stub
-		rows = MINE_SIZE-1;
-		cols = MINE_SIZE-1;
+		rows = MINE_SIZE;
+		cols = MINE_SIZE;
 		numOfPlayer = 1;
-		statePerCell = 12;
+		statePerCell = 3;
 		w = Winner.Neither;
 		return this;
 	}
@@ -118,21 +99,39 @@ public class MineSweepTester extends BoardState implements Configs{
 	@Override
 	public List<Move> getPossibleMove() {
 		// TODO Auto-generated method stub
+//		List<Move> res = new ArrayList<>();
+//		Set<cellState> set = new HashSet<cellState>();
+//		for (int i = 0;i < 3; i++) {
+//			set.add(states[i]);
+//		}
+//		for (int i=0; i<MINE_SIZE; i++) {
+//			for (int j=0; j<MINE_SIZE; j++) {
+//				if (matrix.get(new Point(i,j)).getState()!=cellState.One && matrix.get(new Point(i,j)).getState()!=cellState.Flag) {
+//					for (int k = 0; k < 12; k++) {
+//						res.add(new Move(turn,new Cell(i, j, states[k])));
+//					}
+//				}
+//			}
+//		}
+//		return res;
+//	}
+
 		List<Move> res = new ArrayList<>();
 		Set<cellState> set = new HashSet<cellState>();
-		for (int i = 0;i <= 11; i++) {
+		for(int i = 0; i < 3; i++){
 			set.add(states[i]);
 		}
 		for (int i=0; i<MINE_SIZE; i++) {
 			for (int j=0; j<MINE_SIZE; j++) {
-				if (matrix.get(new Point(i,j)).getState()!=cellState.Nine && matrix.get(new Point(i,j)).getState()!=cellState.Flag) {
-					for (int k = 0; k < 12; k++) {
+				if (matrix.get(new Point(i,j)).getState()==cellState.Zero){
+					for (int k=0; k<2; k++) {
 						res.add(new Move(turn,new Cell(i, j, states[k])));
 					}
 				}
+
 			}
 		}
+
 		return res;
 	}
-
 }
