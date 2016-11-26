@@ -183,7 +183,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
         }
         return cnt;
     }
-
+//
 
     /**
      * 在j1标签上显示信�?
