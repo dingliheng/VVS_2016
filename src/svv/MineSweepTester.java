@@ -15,7 +15,7 @@ import svv.GameConstant.cellState;
 
 public class MineSweepTester extends BoardState implements Configs{
 
-
+//
 	public static MineSweeper mineSweeper;
 	public JButton[][] jb1;
 	public cellState[] states = {cellState.One,cellState.Two,cellState.Three,cellState.Four,cellState.Five,cellState.Six,cellState.Seven,cellState.Eight,cellState.Nine,cellState.Flag,cellState.Zero,cellState.Empty};
