@@ -86,7 +86,7 @@ public class Driver {
 		return passCases / totalCases;
 		
 	}
-	//
+
 	public static void main(String[] args) throws Exception {
 		
 		//String path = "./";
@@ -97,7 +97,7 @@ public class Driver {
 
 //		float testScore = runTests(new TicTacToeSocket('2','x','y'), new TicTacToeTester('2','x','y'));
 //		System.out.println(testScore);
-
+		MineSweeper _mineSweeper = new MineSweeper("hello");
 		float testScore = runTests(new MineSweepSocket(), new MineSweepTester());
 		System.out.println(testScore);
 	}

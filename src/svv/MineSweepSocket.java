@@ -8,13 +8,13 @@ public class MineSweepSocket implements GameSocket,Configs{
 
 	private MineSweepTester mineSweepTester;
 
-	public MineSweepSocket(MineSweeper _mineSweeper){
-		mineSweepTester = new MineSweepTester(_mineSweeper);
+	public MineSweepSocket(){
+		mineSweepTester = new MineSweepTester();
 	}
 
-//	public MineSweepSocket(MineSweepTester _mineSweeperTest){
-//		mineSweepTester = _mineSweeperTest;
-//	}
+	public MineSweepSocket(MineSweepTester _mineSweeperTest){
+		mineSweepTester = _mineSweeperTest;
+	}
 
 	@Override
 	public BoardState getBoard() {
@@ -22,15 +22,10 @@ public class MineSweepSocket implements GameSocket,Configs{
 		return mineSweepTester;
 	}
 
-	public void synBoard() {
-
-	}
-
 	@Override
 	public void startNewGame() {
 		// TODO Auto-generated method stub
 		MineSweepTester.mineSweeper.init();
-		synBoard();
 	}
 
 	@Override
@@ -57,7 +52,6 @@ public class MineSweepSocket implements GameSocket,Configs{
 				}
 			}
 		}
-		synBoard();
 	}
 
 	@Override
@@ -70,6 +64,7 @@ public class MineSweepSocket implements GameSocket,Configs{
 			case 2: return Winner.Second;
 		}
 		return mineSweepTester.getWinner();
+
 	}
 
 }

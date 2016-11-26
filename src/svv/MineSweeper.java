@@ -1,9 +1,5 @@
 package svv;
 
-/**
- * Created by sudan on 2016/11/25.
- */
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -30,7 +26,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
     int[][] map;
 
     /**
-     * 检测某点周围是否有雷，周围点的坐标可由该数组计算得到
+     * �?测某点周围是否有雷，周围点的坐标可由该数组计算得�?
      */
     private int[][] mv = { { -1, 0 }, { -1, 1 }, { 0, 1 }, { 1, 1 }, { 1, 0 },
             { 1, -1 }, { 0, -1 }, { -1, -1 } };
@@ -51,7 +47,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
     }
 
     /**
-     * 将button数组放到frame上，与map[][]数组相对应
+     * 将button数组放到frame上，与map[][]数组相对�?
      */
     public void makeButton() {
 
@@ -102,7 +98,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
         jb = new JButton[MINE_SIZE][MINE_SIZE];
         jl = new JLabel();
         showTime = new JLabel();
-        map = new int[MINE_SIZE][MINE_SIZE]; // 将按钮映射到数组中
+        map = new int[MINE_SIZE][MINE_SIZE]; // 将按钮映射到数组�?
     }
 
     public static void main(String[] args) {
@@ -130,18 +126,23 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
             flag = true;
             showMine();
             return;
+        }else if (map[x][y] != MINE && map[x][y] != CHECKED){
+            String number = Integer.toString(search(x,y));
+            jb[x][y].setText(number);
+
+
         }
 
-        dfs(x, y);
+        //  dfs(x, y);
 
         checkSuccess();
     }
 
     /**
-     * 每次点击完后，判断有没有把全部雷找到，通过计算状态为enable的按钮的个数来判断
+     * 每次点击完后，判断有没有把全部雷找到，�?�过计算状�?�为enable的按钮的个数来判�?
      */
-    private void checkSuccess() {
-        int cnt = 0;  //查看当前已经找到的雷数
+    private int checkSuccess() {
+        int cnt = 0;  //查看当前已经找到的雷�?
         for (int i = 0; i < MINE_SIZE; i++) {
             for (int j = 0; j < MINE_SIZE; j++) {
                 if (jb[i][j].isEnabled()) {
@@ -157,11 +158,12 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
             showMine();
 
         }
+        return cnt;
     }
 
-    public int dfs(int x, int y) {
-        map[x][y] = CHECKED;
-        int i, tx, ty, cnt = 0; //cnt是已经checked的点的附近八个格子的雷数目
+    public int search(int x, int y){
+        int i, tx, ty, cnt = 0;
+
         for (i = 0; i < 8; i++) {
             tx = x + mv[i][0];
             ty = y + mv[i][1];
@@ -176,24 +178,15 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
                 }
             }
         }
-        if (cnt == 0) {
-            for (i = 0; i < 8; i++) {
-                tx = x + mv[i][0];
-                ty = y + mv[i][1];
-                if (tx >= 0 && tx < MINE_SIZE && ty >= 0 && ty < MINE_SIZE
-                        && map[tx][ty] != CHECKED) {
-                    dfs(tx, ty);
-                }
-            }
-        } else {
+        if(cnt == 0){
             jb[x][y].setText(cnt + "");
         }
-        jb[x][y].setEnabled(false);
         return cnt;
     }
 
+
     /**
-     * 在j1标签上显示信息
+     * 在j1标签上显示信�?
      *
      * @param title
      * @param info
@@ -235,22 +228,6 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
         jb[row][col].setText(String.valueOf(status));
     }
 
-    public int getWinner(){
-        for(int i = 0; i < MINE_SIZE; i++){
-            for(int j = 0; j < MINE_SIZE; j++){
-                if(map[i][j] == 1){
-                    return 2;
-                }else if(map[i][j] == 0){
-                    return 0;
-                }
-            }
-        }
-        if(!isValid()){
-            return 2;
-        }else{
-            return 1;
-        }
-    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -269,6 +246,20 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
                 jb[x][y].setText("flag");
             }
         }
+    }
+    public int getWinner(){
+
+        if(checkSuccess() != 10){
+            return 0;
+        }
+        for(int i = 0; i < MINE_SIZE; i++){
+            for(int j = 0; j < MINE_SIZE; j++){
+                if(jb[i][j].getText() == "mine"){
+                    return 2;
+                }
+            }
+        }
+        return 1;
     }
 
     @Override
