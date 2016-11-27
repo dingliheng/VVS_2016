@@ -100,26 +100,25 @@ public class Driver {
 		//String path = "./";
 		//genTests(path, new TicTacToeTester().getInitState());
 
-//	    System.out.println("---------------Sudoku Test---------------");
-//        for (int i=1;i<4;i++) {
-//            System.out.println("--------Test "+(i+1)+"--------");
-//            int emptySlots = 2;
-//            System.out.println("Empty Slots: "+ emptySlots);
-//            long start = System.currentTimeMillis();
+	    System.out.println("---------------tictactoe Test---------------");
+        for (int i=1;i<11;i++) {
+            System.out.println("--------Test "+(i)+"--------");
+            //int emptySlots = (int)Math.pow(2,i+1);
+           // System.out.println("Empty Slots: "+ emptySlots);
+            long start = System.currentTimeMillis();
 //            float testScore = runTests(new SudokuSocket(new SudokuTester(emptySlots)), new SudokuTester(emptySlots));
-//            long stop = System.currentTimeMillis();
-//            System.out.println("Execution time: "+(float)(stop-start)/1000+"s");
-//            //System.out.println(testScore);
-//        }
+            float testScore = runTests(new TicTacToeSocket(new TicTacToeTester('2','x','n')), new TicTacToeTester('2','x','n'));
+            long stop = System.currentTimeMillis();
+            //System.out.println("Execution time: "+(float)(stop-start)/1000+"s");
+            //System.out.println(testScore);
+        }
 
 //		float testScore = runTests(new TicTacToeSocket('2','x','y'), new TicTacToeTester('2','x','y'));
 //		System.out.println(testScore);
 
-			System.out.println("---------------MineSweepere Test ---------------");
-			//MineSweeper _mineSweeper = new MineSweeper("hello");
-			float testScore = runTests(new MineSweepSocket(), new MineSweepTester());
-		//	System.out.println(testScore);
-
+//		MineSweeper _mineSweeper = new MineSweeper("hello");
+//		float testScore = runTests(new MineSweepSocket(), new MineSweepTester());
+//		System.out.println(testScore);
 	}
 	
 }
