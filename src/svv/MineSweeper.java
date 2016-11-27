@@ -15,7 +15,7 @@ import javax.swing.JLabel;
  * @author
  */
 public class MineSweeper extends JFrame implements ActionListener, Runnable,
-        MouseListener, Configs {
+        MouseListener {
 
     public static final long serialVersionUID = -2417758397965039613L;
 
@@ -36,11 +36,11 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
      */
     public void makeMine() {
         int i = 0, tx, ty;
-        for (; i < MINE_COUNT;) {
-            tx = (int) (Math.random() * MINE_SIZE);
-            ty = (int) (Math.random() * MINE_SIZE);
-            if (map[tx][ty] == EMPTY) {
-                map[tx][ty] = MINE;
+        for (; i < 10;) {
+            tx = (int) (Math.random() * 10);
+            ty = (int) (Math.random() * 10 );
+            if (map[tx][ty] == 0) {
+                map[tx][ty] = 1;
                 i++; // 不记重复产生的雷
             }
         }
@@ -51,8 +51,8 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
      */
     public void makeButton() {
 
-        for (int i = 0; i < MINE_SIZE; i++) {
-            for (int j = 0; j < MINE_SIZE; j++) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
                 jb[i][j] = new JButton();
 
                 jb[i][j].addActionListener(this);
@@ -60,19 +60,35 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
 
                 jb[i][j].setName(i + "_" + j); // 方便点击是判断点击了哪个按钮
 
-                jb[i][j].setBounds(j * BUTTON_BORDER + START_X, i
-                        * BUTTON_BORDER + START_Y, BUTTON_BORDER, BUTTON_BORDER);
+                jb[i][j].setBounds(j * 50 + 20, i
+                        * 50 + 50, 50, 50);
                 this.add(jb[i][j]);
-
+                String s = Integer.toString(search(i,j));
+                if(map[i][j] == 1){
+                    jb[i][j].setText("mine");
+                }else{
+                    jb[i][j].setText(s);
+                }
             }
         }
     }
+
+//    public void caculate(){
+//    	for(int i = 0; i < 10; i++){
+//    		for(int j = 0; j < 10; j++){
+//    			int number = search(i,j);
+//    			if(map[i][j] != 9){
+//    				map[i][j] = number;
+//    			}
+//    		}
+//    	}
+//    }
 
     public void init() {
 
         flag = false;
 
-        jl.setText("welcome，total is" + MINE_COUNT);
+        jl.setText("welcome，total is" + 10);
         jl.setVisible(true);
         jl.setBounds(20, 20, 500, 30);
         this.add(jl);
@@ -95,11 +111,12 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
 
         this.setLayout(null);
 
-        jb = new JButton[MINE_SIZE][MINE_SIZE];
+        jb = new JButton[10][10];
         jl = new JLabel();
         showTime = new JLabel();
-        map = new int[MINE_SIZE][MINE_SIZE]; // 将按钮映射到数组�?
+        map = new int[10][10]; // 将按钮映射到数组�?
     }
+
 
     public static void main(String[] args) {
         MineSweeper test = new MineSweeper("Hello Miner!");
@@ -116,17 +133,18 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
             showMessage("", "inside error");
             return;
         }
+        //   caculate();
         String[] tmp_str = ((JButton) obj).getName().split("_");
         x = Integer.parseInt(tmp_str[0]);
         y = Integer.parseInt(tmp_str[1]);
 
-        if (map[x][y] == MINE) {
+        if (map[x][y] == 1) {
 
             showMessage("died", "you lose");
             flag = true;
             showMine();
             return;
-        }else if (map[x][y] != MINE && map[x][y] != CHECKED){
+        }else if (map[x][y] != 1 ){
             String number = Integer.toString(search(x,y));
             jb[x][y].setText(number);
 
@@ -143,14 +161,14 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
      */
     private int checkSuccess() {
         int cnt = 0;  //查看当前已经找到的雷�?
-        for (int i = 0; i < MINE_SIZE; i++) {
-            for (int j = 0; j < MINE_SIZE; j++) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
                 if (jb[i][j].isEnabled()) {
                     cnt++;
                 }
             }
         }
-        if (cnt == MINE_COUNT) {
+        if (cnt == 10) {
             String tmp_str = showTime.getText();
             tmp_str = tmp_str.replaceAll("[^0-9]", "");
             showMessage("success", "total time:" + tmp_str + "s");
@@ -167,15 +185,16 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
         for (i = 0; i < 8; i++) {
             tx = x + mv[i][0];
             ty = y + mv[i][1];
-            if (tx >= 0 && tx < MINE_SIZE && ty >= 0 && ty < MINE_SIZE) {
-                if (map[tx][ty] == MINE) {
+            if (tx >= 0 && tx < 10 && ty >= 0 && ty < 10) {
+                if (map[tx][ty] == 1) {
                     cnt++;// 改点附近雷数统计
-                } else if (map[tx][ty] == EMPTY) {
+                } else if (map[tx][ty] == 0) {
                     ;
-                } else if (map[tx][ty] == CHECKED) {
-                    ;
-
                 }
+//                  else if (map[tx][ty] == 2){
+//                    ;
+//
+//                  }
             }
         }
         if(cnt == 0){
@@ -214,9 +233,9 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
     }
 
     void showMine() {
-        for (int i = 0; i < MINE_SIZE; i++) {
-            for (int j = 0; j < MINE_SIZE; j++) {
-                if (map[i][j] == MINE) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (map[i][j] == 1) {
                     jb[i][j].setText("mine");
 
                 }
@@ -224,8 +243,8 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
         }
     }
 
-    public void makeMove(int row, int col, String status){
-        jb[row][col].setText(String.valueOf(status));
+    public void makeMove(int row, int col, String status){//如果player在（row,col）这里点击的话这一点的状态
+        jb[row][col].setText(status);
     }
 
 
@@ -252,8 +271,8 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
         if(checkSuccess() != 10){
             return 0;
         }
-        for(int i = 0; i < MINE_SIZE; i++){
-            for(int j = 0; j < MINE_SIZE; j++){
+        for(int i = 0; i < 10; i++){
+            for(int j = 0; j < 10; j++){
                 if(jb[i][j].getText() == "mine"){
                     return 2;
                 }
