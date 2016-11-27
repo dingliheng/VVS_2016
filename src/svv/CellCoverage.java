@@ -21,7 +21,7 @@ public class CellCoverage {
 		visited = new HashMap<>();
 		Points = new HashSet<Point>();
 		int numOfSlot = bs.getEmptyPoints().size();
-		allstate = numOfSlot * (bs.statePerCell-1);
+		allstate = numOfSlot*(bs.statePerCell-1);
 		for(Point p: bs.getEmptyPoints()){
 			Points.add(p);
 			Set<cellState> states = new HashSet<>();

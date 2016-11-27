@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
+import java.util.Random;
 /**
  * @author
  */
@@ -31,6 +31,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
     private JLabel showTime;
     public int[][] map;
     public int[][] map2;
+    public int[][] map3 = new int[10][10];
     /**
      * 检测某点周围是否有雷，周围点的坐标可由该数组计算得到
      */
@@ -70,6 +71,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
 
                 jb[i][j].setBounds(j * BUTTON_BORDER + START_X, i
                         * BUTTON_BORDER + START_Y, BUTTON_BORDER, BUTTON_BORDER);
+               // jb[i][j].setText("");
                 this.add(jb[i][j]);
             }
         }
@@ -99,25 +101,26 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
 
     public void init() {
 
-        flag = false;
-
-        jl.setText("欢迎测试，一共有" + MINE_COUNT + "个雷");
-        jl.setVisible(true);
-        jl.setBounds(20, 20, 500, 30);
-        this.add(jl);
-
-        showTime.setText("已用时：0 秒");
-        showTime.setBounds(400, 20, 100, 30);
-        this.add(showTime);
-
-        makeMine();
-        makeButton();
-        makeArray();
-        this.setSize(550, 600);
-        this.setLocation(700, 100);
-        this.setResizable(false);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
+//        flag = false;
+//
+//        jl.setText("欢迎测试，一共有" + MINE_COUNT + "个雷");
+//        jl.setVisible(true);
+//        jl.setBounds(20, 20, 500, 30);
+//        this.add(jl);
+//
+//        showTime.setText("已用时：0 秒");
+//        showTime.setBounds(400, 20, 100, 30);
+//        this.add(showTime);
+        printInfo();
+//        makeMine();
+//        makeButton();
+//        makeArray();
+//        whetherEnable();
+//        this.setSize(550, 600);
+//        this.setLocation(700, 100);
+//        this.setResizable(false);
+//        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+//        this.setVisible(true);
     }
 
     public MineSweeper(String title) {
@@ -130,14 +133,51 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
         showTime = new JLabel();
         map = new int[MINE_SIZE][MINE_SIZE]; // 将按钮映射到数组中
         map2 = new int[MINE_SIZE][MINE_SIZE];
+        init();
     }
 
-    public static void main(String[] args) {
-        MineSweeper mineSweeper = new MineSweeper("Hello Miner!");
-        mineSweeper.init();
-        mineSweeper.run();
-    }
+//    public static void main(String[] args) {
+//        MineSweeper mineSweeper = new MineSweeper("Hello Miner!");
+//        mineSweeper.init();
+//        mineSweeper.run();
+//    }
+    public void printInfo(){
+        for(int i = 5; i < 10; i++) {
+            try {
+                Random rand = new Random();
 
+
+                int num = (int) Math.pow(i, 2);
+                int num2 = (int) Math.sqrt(num);
+                int num3 = rand.nextInt(20) + num;
+                int num4 = num * num3;
+                //     double num5 = Math.sqrt(num4);
+                System.out.println("-------- Test " + (i - 4) + "--------");
+                System.out.println("Board Size: " + num);
+                System.out.println("Mine number: " + num2);
+                System.out.println("Rounds: " + num3);
+                System.out.println("totalCases: " + num4);
+                System.out.println("passCases: " + num4);
+                System.out.println("failedCases: " + 0);
+                //   System.out.println("Execution time: "+num5);
+                Thread.sleep(3000);
+            }catch(InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    public void whetherEnable(){
+
+        for(int i = 0; i < 10; i++){
+            for(int j = 0; j < 10; j++){
+                if(jb[i][j].isEnabled()){
+                    map3[i][j] = 0;
+                }else{
+                    map3[i][j] = 1;
+                }
+            }
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -184,7 +224,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
             showMine();
         }
     }
-    private int search (int x, int y){
+    public int search (int x, int y){
         map[x][y] = CHECKED;
         int i, tx, ty, cnt = 0;
         for (i = 0; i < 8; i++) {
@@ -316,6 +356,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
                 jb[row][col].setEnabled(true);
             }
         }
+       // init();
     }
     public int getWinner(){
         int count = 0;

@@ -82,10 +82,15 @@ public class Driver {
 				passCases += 0;
 			}
 		}
-        System.out.println("Rounds: "+rounds);
-        System.out.println("totalCases: "+totalCases);
-        System.out.println("passCases: "+passCases);
-        System.out.println("failedCases: "+(totalCases-passCases));
+
+		if(totalCases == 0){
+
+			return 0;
+		}
+		System.out.println("Rounds: "+rounds);
+		System.out.println("totalCases: "+totalCases);
+		System.out.println("passCases: "+passCases);
+		System.out.println("failedCases: "+(totalCases-passCases));
 		return passCases / totalCases;
 		
 	}
@@ -110,9 +115,11 @@ public class Driver {
 //		float testScore = runTests(new TicTacToeSocket('2','x','y'), new TicTacToeTester('2','x','y'));
 //		System.out.println(testScore);
 
-		MineSweeper _mineSweeper = new MineSweeper("hello");
-		float testScore = runTests(new MineSweepSocket(), new MineSweepTester());
-		System.out.println(testScore);
+			System.out.println("---------------MineSweepere Test ---------------");
+			//MineSweeper _mineSweeper = new MineSweeper("hello");
+			float testScore = runTests(new MineSweepSocket(), new MineSweepTester());
+		//	System.out.println(testScore);
+
 	}
 	
 }
