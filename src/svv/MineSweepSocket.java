@@ -28,9 +28,9 @@ public class MineSweepSocket implements GameSocket {
 			for(int j=0; j<10; j++) {
 				//String content = myjb[i][j].getText();
 				int number = myMap2[i][j];
-//				if(myButton[i][j].isEnabled() && myButton[i][j].getText().equals("")){
-//					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Empty));
-//				}
+				if(myButton[i][j].isEnabled() && myButton[i][j].getText().equals("")){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Empty));
+				}
 				if(number == 9){
 					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Nine));
 				}else{
@@ -65,6 +65,7 @@ public class MineSweepSocket implements GameSocket {
 		mineSweepTester.mineSweeper.startNewGame();
 		synBoard();
 	}
+
 
 	@Override
 	public void makeMove(Move m) {

@@ -18,6 +18,7 @@ public class MineSweepTester extends BoardState{
 
 	public MineSweepTester(){
 		mineSweeper = new MineSweeper("hello");
+		mineSweeper.init();
 		myjb = mineSweeper.jb;
 		mymap2 = mineSweeper.map2;
 		for (int i=0; i<10 ; i++) {
@@ -103,39 +104,46 @@ public class MineSweepTester extends BoardState{
 
 	@Override
 	public BoardState initBoardConstant() {
-//		myjb = mineSweeper.jb;
-//		mymap2 = mineSweeper.map2;
-		// TODO Auto-generated method stub
+		mineSweeper = new MineSweeper("hello");
+		mineSweeper.init();
+		myjb = mineSweeper.jb;
+		mymap2 = mineSweeper.map2;
 		for (int i=0; i<10 ; i++) {
-			for (int j = 0; j < 10; j++) {
-				int num = mymap2[i][j];
-				String s = myjb[i][j].getText();
-				if(s.equals("") && myjb[i][j].isEnabled()){
+			for(int j=0; j<10; j++) {
+				//String content = myjb[i][j].getText();
+				int num2 = mymap2[i][j];
+				if(myjb[i][j].isEnabled() && myjb[i][j].getText().equals("")){
 					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Empty));
-				}else if(num == 9){
+				}
+				if(num2 == 9){
 					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Nine));
-				}else if(num == 1){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.One));
-				}else if(num == 2){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Two));
-				}else if(num == 3){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Three));
-				}else if(num == 4){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Four));
-				}else if(num == 5){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Five));
-				}else if(num == 6){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Six));
-				}else if(num == 7){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Seven));
-				}else if(num == 8){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Eight));
-				}else if(num == 0){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Zero));
+				}else{
+					if(num2 == 0){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Zero));
+					}else if(num2 == 1){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.One));
+					}else if(num2 == 2){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Two));
+					}else if(num2 == 3){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Three));
+					}else if(num2 == 4){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Four));
+					}else if(num2 == 5){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Five));
+					}else if(num2 == 6){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Six));
+					}else if(num2 == 7){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Seven));
+					}else if(num2 == 8){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Eight));
+					}
+//						else if(content.equals("flag")){
+//						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Flag));
+//					}
 				}
 			}
 		}
-		return this;
+	return this;
 	}
 
 	@Override
