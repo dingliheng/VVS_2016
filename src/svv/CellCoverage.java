@@ -9,7 +9,7 @@ import svv.GameConstant.cellState;
 import static svv.GameConstant.cellState.Empty;
 
 public class CellCoverage {
-	int allstate = 0;
+	int allstate = 100;
 	int curVisited = 0;
 	Set<Point> Points;
 
