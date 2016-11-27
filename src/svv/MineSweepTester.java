@@ -92,13 +92,49 @@ public class MineSweepTester extends BoardState{
 	@Override
 	public BoardState getInitState() {
 		// TODO Auto-generated method stub
-		return null;
+		rows = 10;
+		cols = 10;
+		numOfPlayer = 1;
+		statePerCell = 12;
+		w = Winner.Neither;
+		return this;
 	}
 
 	@Override
 	public BoardState initBoardConstant() {
+//		myjb = mineSweeper.jb;
+//		mymap2 = mineSweeper.map2;
 		// TODO Auto-generated method stub
-		return null;
+		for (int i=0; i<10 ; i++) {
+			for (int j = 0; j < 10; j++) {
+				int num = mymap2[i][j];
+				String s = myjb[i][j].getText();
+				if(s.equals("") && myjb[i][j].isEnabled()){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Empty));
+				}else if(num == 9){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Nine));
+				}else if(num == 1){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.One));
+				}else if(num == 2){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Two));
+				}else if(num == 3){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Three));
+				}else if(num == 4){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Four));
+				}else if(num == 5){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Five));
+				}else if(num == 6){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Six));
+				}else if(num == 7){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Seven));
+				}else if(num == 8){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Eight));
+				}else if(num == 0){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Zero));
+				}
+			}
+		}
+		return this;
 	}
 
 	@Override
