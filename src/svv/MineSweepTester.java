@@ -1,137 +1,110 @@
 package svv;
 
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.JButton;
 
 import svv.GameConstant.Winner;
 import svv.GameConstant.cellState;
 
-
 public class MineSweepTester extends BoardState{
+	public MineSweeper mineSweeper;
+	public JButton[][] myjb;
+	public int[][] mymap;
+	public int[][] mymap2;
+	public cellState[] states = {cellState.Zero,cellState.One,cellState.Two,cellState.Three,cellState.Four,cellState.Five,cellState.Six,cellState.Seven,cellState.Eight,cellState.Nine,cellState.Empty};
 
-	public static MineSweeper mineSweeper;
-	public JButton[][] jb1 = mineSweeper.jb;
-	public int[][] map1 = mineSweeper.map;
-	public cellState[] states = {cellState.Zero,cellState.One,cellState.Two,cellState.Three,cellState.Four,cellState.Five,cellState.Six,cellState.Seven,cellState.Eight,cellState.Flag,cellState.Mine,cellState.Empty};
 	public MineSweepTester(){
-		mineSweeper = new MineSweeper("Hello Miner");
-		for(int i = 0; i < 10; i++){
-			for(int j = 0; j < 10; j++){
-				String s = jb1[i][j].getText();
-				if(map1[i][j] != 1){
-					if(s.equals("0")){
+		mineSweeper = new MineSweeper("hello");
+		myjb = mineSweeper.jb;
+		mymap2 = mineSweeper.map2;
+		for (int i=0; i<10 ; i++) {
+			for(int j=0; j<10; j++) {
+				//String content = myjb[i][j].getText();
+				int num2 = mymap2[i][j];
+//				if(myjb[i][j].isEnabled() && myjb[i][j].getText().equals("")){
+//					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Empty));
+//				}
+				if(num2 == 9){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Nine));
+				}else{
+					if(num2 == 0){
 						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Zero));
-					}else if(s.equals("1")){
+					}else if(num2 == 1){
 						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.One));
-					}else if(s.equals("2")){
+					}else if(num2 == 2){
 						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Two));
-					}else if(s.equals("3")){
+					}else if(num2 == 3){
 						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Three));
-					}else if(s.equals("4")){
+					}else if(num2 == 4){
 						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Four));
-					}else if(s.equals("5")){
+					}else if(num2 == 5){
 						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Five));
-					}else if(s.equals("6")){
+					}else if(num2 == 6){
 						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Six));
-					}else if(s.equals("7")){
+					}else if(num2 == 7){
 						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Seven));
-					}else if(s.equals("8")){
+					}else if(num2 == 8){
 						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Eight));
 					}
-					else if(s.equals("")){
-						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Empty));
-					}
-//					else if(jb1[i][j].equals("flag")){
+//						else if(content.equals("flag")){
 //						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Flag));
 //					}
-				}else if(map1[i][j] == 1){
-					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Mine));
 				}
-
 			}
 		}
+
 	}
-
-
 	@Override
 	public boolean isValid() {
-		for(int i = 0; i < 10; i++){
-			for(int j = 0; j < 10; j++){
-				if(map1[i][j] != 1){
-					if(jb1[i][j].getText() != Integer.toString(mineSweeper.search(i,j))){
-						return false;
-					}
-				}else{
-					if(jb1[i][j].getText() != "mine"){
-						return false;
-					}
+		// TODO Auto-generated method stub
+		int cnt = 0;
+		for (int i=0; i<10 ; i++) {
+			for(int j=0; j<10; j++) {
+				if(mymap2[i][j] == 9){
+					cnt++;
 				}
 			}
 		}
-		return true;
+		if(cnt == 10){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	@Override
 	public Winner getWinner() {
-		for(int i=0;i<10;i++) {
-			for(int j=0;j<10;j++) {
-
-				if (matrix.get(new Point(i,j)).getState() == cellState.Mine) {
+		// TODO Auto-generated method stub
+		for (int i=0; i<10 ; i++) {
+			for(int j=0; j<10; j++) {
+				if (matrix.get(new Point(i,j)).getState()==cellState.Nine) {
 					return Winner.Second;
-				}else {
+				}else if(matrix.get(new Point(i,j)).getState()==cellState.Empty){
 					return Winner.Neither;
 				}
 			}
 		}
-		if(!isValid()) {
-			return Winner.Second;
-		}else {
-			return Winner.First;
-		}
+		return Winner.First;
 	}
 
 	@Override
 	public BoardState getInitState() {
 		// TODO Auto-generated method stub
-		return this;
+		return null;
 	}
 
 	@Override
 	public BoardState initBoardConstant() {
 		// TODO Auto-generated method stub
-		rows = 10;
-		cols = 10;
-		numOfPlayer = 1;
-		statePerCell = 12;
-		w = Winner.Neither;
-		return this;
+		return null;
 	}
 
 	@Override
 	public List<Move> getPossibleMove() {
 		// TODO Auto-generated method stub
-
-		List<Move> res = new ArrayList<>();
-//		Set<cellState> set = new HashSet<cellState>();
-//		for(int i = 0; i < 12; i++){
-//			set.add(states[i]);
-//		}
-		for (int i=0; i<10; i++) {
-			for (int j=0; j<10; j++) {
-				if(jb1[i][j].isEnabled()) {
-					for (int k = 0; k < 11; k++) {
-						res.add(new Move(turn, new Cell(i, j, states[k])));
-					}
-				}
-
-			}
-		}
-
-		return res;
+		return null;
 	}
+
 }
