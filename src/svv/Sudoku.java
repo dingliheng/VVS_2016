@@ -60,7 +60,7 @@ public class Sudoku extends JFrame {
     /**
      * Constructor to setup the game and the UI Components
      */
-    public Sudoku() {
+    public Sudoku(int emptySlots) {
         Container cp = getContentPane();
         cp.setLayout(new GridLayout(GRID_SIZE, GRID_SIZE));  // 9x9 GridLayout
 
@@ -68,6 +68,17 @@ public class Sudoku extends JFrame {
         //  JTextFields
         // ... [TODO 3] (Later) ....
         InputListener listener = new InputListener();
+
+        int counter = 0;
+        for (int i=0;i<9;i++) {
+            for (int j=0;j<9;j++) {
+                if (counter<emptySlots) {
+                    masks[i][j] = true;
+                    counter++;
+                }
+                else break;
+            }
+        }
 
         // Construct 9x9 JTextFields and add to the content-pane
         for (int row = 0; row < GRID_SIZE; ++row) {
@@ -160,27 +171,27 @@ public class Sudoku extends JFrame {
     /**
      * The entry main() entry method
      */
-    public static void main(String[] args) {
-        //System.out.print(Integer.parseInt("sdf"));
-        // [TODO 1] (Now)
-        // Check Swing program template on how to run the constructor
-        Sudoku sudoku = new Sudoku();
-        boolean[][] masks = sudoku.masks;
-        for (int row = 0; row < GRID_SIZE; ++row) {
-            for (int col = 0; col < GRID_SIZE; ++col) {
-                if (masks[row][col]) {
-                    sudoku.tfCells[row][col].setText("oh");     // set to empty string
-                    sudoku.tfCells[row][col].setBackground(OPEN_CELL_BGCOLOR);
-
-                    // Add ActionEvent listener to process the input
-                    // ... [TODO 4] (Later) ...
-                }
-                // Beautify all the cells
-                sudoku.tfCells[row][col].setHorizontalAlignment(JTextField.CENTER);
-                sudoku.tfCells[row][col].setFont(FONT_NUMBERS);
-            }
-        }
-    }
+//    public static void main(String[] args) {
+//        //System.out.print(Integer.parseInt("sdf"));
+//        // [TODO 1] (Now)
+//        // Check Swing program template on how to run the constructor
+//        Sudoku sudoku = new Sudoku();
+//        boolean[][] masks = sudoku.masks;
+//        for (int row = 0; row < GRID_SIZE; ++row) {
+//            for (int col = 0; col < GRID_SIZE; ++col) {
+//                if (masks[row][col]) {
+//                    sudoku.tfCells[row][col].setText("oh");     // set to empty string
+//                    sudoku.tfCells[row][col].setBackground(OPEN_CELL_BGCOLOR);
+//
+//                    // Add ActionEvent listener to process the input
+//                    // ... [TODO 4] (Later) ...
+//                }
+//                // Beautify all the cells
+//                sudoku.tfCells[row][col].setHorizontalAlignment(JTextField.CENTER);
+//                sudoku.tfCells[row][col].setFont(FONT_NUMBERS);
+//            }
+//        }
+//    }
 
     // Define the Listener Inner Class
     // ... [TODO 2] (Later) ...

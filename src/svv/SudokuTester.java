@@ -17,9 +17,9 @@ public class SudokuTester extends BoardState{
 	public Sudoku sudoku;
 	public JTextField[][] myBoard;
 	public cellState[] states = {cellState.One,cellState.Two,cellState.Three,cellState.Four,cellState.Five,cellState.Six,cellState.Seven,cellState.Eight,cellState.Nine};
-	public SudokuTester() {
+	public SudokuTester(int emptySlots) {
 		//System.out.println("sssss");
-		sudoku = new Sudoku();
+		sudoku = new Sudoku(emptySlots);
 		myBoard = sudoku.tfCells;
 		for (int i=0; i<9 ; i++) {
 			for(int j=0; j<9; j++) {

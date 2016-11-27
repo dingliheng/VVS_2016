@@ -49,11 +49,11 @@ public class Driver {
 
 		CellCoverage cc = new CellCoverage(bs.getInitState());
 		BoardState cur;
-
+        int rounds = 0;
 		while(cc.getCoverage() < 1.0){
 			cur = bs.getInitState();
 			gs.startNewGame();
-			
+			rounds++;
 			while(cur.getWinner() == Winner.Neither){
 				
 				List<Move> possibleMoves = cur.getPossibleMove();
@@ -82,7 +82,10 @@ public class Driver {
 				passCases += 0;
 			}
 		}
-		System.out.println(passCases / totalCases);
+        System.out.println("Rounds: "+rounds);
+        System.out.println("totalCases: "+totalCases);
+        System.out.println("passCases: "+passCases);
+        System.out.println("failedCases: "+(totalCases-passCases));
 		return passCases / totalCases;
 		
 	}
@@ -91,15 +94,25 @@ public class Driver {
 		
 		//String path = "./";
 		//genTests(path, new TicTacToeTester().getInitState());
-	    
-//		float testScore = runTests(new SudokuSocket(new SudokuTester()), new SudokuTester());
-//		System.out.println(testScore);
+
+	    System.out.println("---------------Sudoku Test---------------");
+        for (int i=1;i<4;i++) {
+            System.out.println("--------Test "+(i+1)+"--------");
+            int emptySlots = (int)Math.pow(2,i+1);
+            System.out.println("Empty Slots: "+ emptySlots);
+            long start = System.currentTimeMillis();
+            float testScore = runTests(new SudokuSocket(new SudokuTester(emptySlots)), new SudokuTester(emptySlots));
+            long stop = System.currentTimeMillis();
+            System.out.println("Execution time: "+(float)(stop-start)/1000+"s");
+            //System.out.println(testScore);
+        }
 
 //		float testScore = runTests(new TicTacToeSocket('2','x','y'), new TicTacToeTester('2','x','y'));
 //		System.out.println(testScore);
-		MineSweeper _mineSweeper = new MineSweeper("hello");
-		float testScore = runTests(new MineSweepSocket(), new MineSweepTester());
-		System.out.println(testScore);
+
+//		MineSweeper _mineSweeper = new MineSweeper("hello");
+//		float testScore = runTests(new MineSweepSocket(), new MineSweepTester());
+//		System.out.println(testScore);
 	}
 	
 }

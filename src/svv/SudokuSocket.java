@@ -10,8 +10,8 @@ import java.util.Map;
 public class SudokuSocket implements GameSocket {
 	private SudokuTester sudokuTester;
 
-	public SudokuSocket() {
-		sudokuTester = new SudokuTester();
+	public SudokuSocket(int emptySlots) {
+		sudokuTester = new SudokuTester(emptySlots);
 	}
 
 	public SudokuSocket(SudokuTester _sudokuTester) {
@@ -58,7 +58,7 @@ public class SudokuSocket implements GameSocket {
 
 		for (int i=0;i<9;i++) {
 			if( state == sudokuTester.states[i]) {
-				sudokuTester.sudoku.tfCells[r][l].setText(String.valueOf(i));
+				sudokuTester.sudoku.tfCells[r][l].setText(String.valueOf(i+1));
 				break;
 			}
 		}
