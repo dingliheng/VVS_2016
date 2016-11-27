@@ -1,6 +1,7 @@
 package svv;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -140,7 +141,35 @@ public class MineSweepTester extends BoardState{
 	@Override
 	public List<Move> getPossibleMove() {
 		// TODO Auto-generated method stub
-		return null;
+		List<Move> res = new ArrayList<>();
+		for (int i=0; i<10; i++) {
+			for (int j = 0; j < 10; j++) {
+				if(myjb[i][j].isEnabled()){
+					if(myjb[i][j].getText().equals("1")){
+					res.add(new Move(turn,new Cell(i, j, GameConstant.cellState.One)));
+					}else if(myjb[i][j].getText().equals("2")){
+						res.add(new Move(turn,new Cell(i, j, GameConstant.cellState.Two)));
+					}else if(myjb[i][j].getText().equals("3")){
+						res.add(new Move(turn,new Cell(i, j, GameConstant.cellState.Three)));
+					}else if(myjb[i][j].getText().equals("4")){
+						res.add(new Move(turn,new Cell(i, j, GameConstant.cellState.Four)));
+					}else if(myjb[i][j].getText().equals("5")){
+						res.add(new Move(turn,new Cell(i, j, GameConstant.cellState.Five)));
+					}else if(myjb[i][j].getText().equals("6")){
+						res.add(new Move(turn,new Cell(i, j, GameConstant.cellState.Six)));
+					}else if(myjb[i][j].getText().equals("7")){
+						res.add(new Move(turn,new Cell(i, j, GameConstant.cellState.Seven)));
+					}else if(myjb[i][j].getText().equals("8")){
+						res.add(new Move(turn,new Cell(i, j, GameConstant.cellState.Eight)));
+					}else if(myjb[i][j].getText().equals("9")){
+						res.add(new Move(turn,new Cell(i, j, GameConstant.cellState.Nine)));
+					}else if(myjb[i][j].getText().equals("")){
+						res.add(new Move(turn,new Cell(i, j, GameConstant.cellState.Zero)));
+					}
+				}
+			}
+		}
+		return res;
 	}
 
 }
