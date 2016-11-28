@@ -70,77 +70,77 @@ public class TicTacToe_dual
   
   
   
-  public static void main(String[] args)
-  {
-
-    //final int SIZE = 3;
-    //char[][] board = new char[SIZE][SIZE]; // game board
-
-	  TicTacToe_dual tictactoe = new TicTacToe_dual();
-   
-	  remainCount = SIZE * SIZE; // empty cell count
-
-    // THE VERY FIRST MOVE.
-    if (tictactoe.ans == 'y') {
-      tictactoe.turn = 0;
-      if(numberOfplayer=='2') System.out.println("  Player 1's turn");
-      userPlay(tictactoe.board, tictactoe.userSymbol); // user puts his/her first tic
-    }
-    else {
-      tictactoe.turn = 1;
-      if (numberOfplayer=='2'){
-    	  System.out.println("  Player 2's turn");
-    	  userPlay(tictactoe.board, tictactoe.compSymbol);
-      }	
-      else
-      compPlay(tictactoe.board, tictactoe.compSymbol); // computer puts its first tic
-    }
-    // Show the board, and decrement the count of remaining cells.
-    showBoard(tictactoe.board);
-    remainCount--;
-
-    // Play the game until either one wins.
-    boolean done = false;
-    int winner = -1;   // 0 -- the user, 1 -- the computer/the player 2, -1 -- draw
-
-    while (!done && remainCount > 0) {
-      // If there is a winner at this time, set the winner and the done flag to true.
-      done = isGameWon(tictactoe.board, tictactoe.turn, tictactoe.userSymbol, tictactoe.compSymbol); // Did the turn won?
-
-      if (done)
-        winner = tictactoe.turn; // the one who made the last move won the game
-      else {
-        // No winner yet.  Find the next turn and play.
-        tictactoe.turn = (tictactoe.turn + 1 ) % 2;
-
-        if (tictactoe.turn == 0){
-        	if (numberOfplayer=='2')	System.out.println("  Player 1's turn");
-          userPlay(tictactoe.board, tictactoe.userSymbol);
-          }
-        else{
-        	if(numberOfplayer=='2'){
-        		System.out.println("  Player 2's turn");
-        		userPlay(tictactoe.board, tictactoe.compSymbol);
-        		}
-        	else 
-        		compPlay(tictactoe.board, tictactoe.compSymbol);}
-        
-
-        // Show the board after one tic, and decrement the rem count.
-        showBoard(tictactoe.board);
-        remainCount--;
-      }
-    }
-
-    // Winner is found.  Declare the winner.
-    if (winner == 0)
-      System.out.println("\n** YOU WON.  CONGRATULATIONS!! **");
-    else if (winner == 1)
-      System.out.println("\n** YOU LOST..  Maybe next time :) **");
-    else
-      System.out.println("\n** DRAW... **");
-
-  }
+//  public static void main(String[] args)
+//  {
+//
+//    //final int SIZE = 3;
+//    //char[][] board = new char[SIZE][SIZE]; // game board
+//
+//	  TicTacToe_dual tictactoe = new TicTacToe_dual();
+//
+//	  remainCount = SIZE * SIZE; // empty cell count
+//
+//    // THE VERY FIRST MOVE.
+//    if (tictactoe.ans == 'y') {
+//      tictactoe.turn = 0;
+//      if(numberOfplayer=='2') System.out.println("  Player 1's turn");
+//      userPlay(tictactoe.board, tictactoe.userSymbol); // user puts his/her first tic
+//    }
+//    else {
+//      tictactoe.turn = 1;
+//      if (numberOfplayer=='2'){
+//    	  System.out.println("  Player 2's turn");
+//    	  userPlay(tictactoe.board, tictactoe.compSymbol);
+//      }
+//      else
+//      compPlay(tictactoe.board, tictactoe.compSymbol); // computer puts its first tic
+//    }
+//    // Show the board, and decrement the count of remaining cells.
+//    showBoard(tictactoe.board);
+//    remainCount--;
+//
+//    // Play the game until either one wins.
+//    boolean done = false;
+//    int winner = -1;   // 0 -- the user, 1 -- the computer/the player 2, -1 -- draw
+//
+//    while (!done && remainCount > 0) {
+//      // If there is a winner at this time, set the winner and the done flag to true.
+//      done = isGameWon(tictactoe.board, tictactoe.turn, tictactoe.userSymbol, tictactoe.compSymbol); // Did the turn won?
+//
+//      if (done)
+//        winner = tictactoe.turn; // the one who made the last move won the game
+//      else {
+//        // No winner yet.  Find the next turn and play.
+//        tictactoe.turn = (tictactoe.turn + 1 ) % 2;
+//
+//        if (tictactoe.turn == 0){
+//        	if (numberOfplayer=='2')	System.out.println("  Player 1's turn");
+//          userPlay(tictactoe.board, tictactoe.userSymbol);
+//          }
+//        else{
+//        	if(numberOfplayer=='2'){
+//        		System.out.println("  Player 2's turn");
+//        		userPlay(tictactoe.board, tictactoe.compSymbol);
+//        		}
+//        	else
+//        		compPlay(tictactoe.board, tictactoe.compSymbol);}
+//
+//
+//        // Show the board after one tic, and decrement the rem count.
+//        showBoard(tictactoe.board);
+//        remainCount--;
+//      }
+//    }
+//
+//    // Winner is found.  Declare the winner.
+//    if (winner == 0)
+//      System.out.println("\n** YOU WON.  CONGRATULATIONS!! **");
+//    else if (winner == 1)
+//      System.out.println("\n** YOU LOST..  Maybe next time :) **");
+//    else
+//      System.out.println("\n** DRAW... **");
+//
+//  }
 
   public static void resetBoard()
   {

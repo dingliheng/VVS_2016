@@ -67,7 +67,7 @@ public class Sudoku extends JFrame {
 
         // Allocate a common listener as the ActionEvent listener for all the
         //  JTextFields
-        // ... [TODO 3] (Later) ....
+
         InputListener listener = new InputListener();
 
         int counter = 0;
@@ -92,7 +92,6 @@ public class Sudoku extends JFrame {
                     tfCells[row][col].setBackground(OPEN_CELL_BGCOLOR);
 
                     // Add ActionEvent listener to process the input
-                    // ... [TODO 4] (Later) ...
                     tfCells[row][col].addActionListener(listener);
                 } else {
                     tfCells[row][col].setText(puzzle[row][col] + "");
@@ -129,7 +128,8 @@ public class Sudoku extends JFrame {
     }
 
     public void makeMove(int row, int col, int number) {
-        tfCells[row][col].setText(String.valueOf(number));
+        //TODO: generate a bug
+        tfCells[row][col].setText(String.valueOf(number+1));
     }
 
     public int getWinner() {
@@ -195,7 +195,6 @@ public class Sudoku extends JFrame {
 //    }
 
     // Define the Listener Inner Class
-    // ... [TODO 2] (Later) ...
     private class InputListener implements ActionListener {
 
         @Override
@@ -218,21 +217,6 @@ public class Sudoku extends JFrame {
                     }
                 }
             }
-
-         /*
-          * [TODO 5]
-          * 1. Get the input String via tfCells[rowSelected][colSelected].getText()
-          * 2. Convert the String to int via Integer.parseInt().
-          * 3. Assume that the solution is unique. Compare the input number with
-          *    the number in the puzzle[rowSelected][colSelected].  If they are the same,
-          *    set the background to green (Color.GREEN); otherwise, set to red (Color.RED).
-          */
-
-         /*
-          * [TODO 6] Check if the player has solved the puzzle after this move.
-          * You could update the masks[][] on correct guess, and check the masks[][] if
-          * any input cell pending.
-          */
         }
     }
 }

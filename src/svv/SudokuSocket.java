@@ -58,7 +58,8 @@ public class SudokuSocket implements GameSocket {
 
 		for (int i=0;i<9;i++) {
 			if( state == sudokuTester.states[i]) {
-				sudokuTester.sudoku.tfCells[r][l].setText(String.valueOf(i+1));
+				sudokuTester.sudoku.makeMove(r, l, i+1);
+				//sudokuTester.sudoku.tfCells[r][l].setText(String.valueOf(i+1));
 				break;
 			}
 		}
