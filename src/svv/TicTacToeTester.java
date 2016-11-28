@@ -117,22 +117,22 @@ public class TicTacToeTester extends BoardState {
 		
 		
 		//for horizontal direction
-		for(i=0;i<cols && !someone_wins;i++){
-			for(j=0; j<cols;j++){
+		for(i=0;i<3 && !someone_wins;i++){
+			for(j=0; j<3;j++){
 				if(matrix.get(new Point(i,j)).getState() != protenial_winner_state) 	break;		
-			}if( j ==cols){
+			}if( j ==3){
 				someone_wins=true;
 			}
 		}
 		
 		
 		//for vertical direction
-		for (j = 0; j < cols && !someone_wins; j++) {
-		      for (i = 0; i < cols; i++) {
+		for (j = 0; j < 3 && !someone_wins; j++) {
+		      for (i = 0; i < 3; i++) {
 		        if (matrix.get(new Point(i,j)).getState() != protenial_winner_state)
 		          break;
 		      }
-		      if (i == cols)
+		      if (i == 3)
 		        someone_wins = true;
 		    }
 		
@@ -140,21 +140,21 @@ public class TicTacToeTester extends BoardState {
 		//for diagonal
 		
 		if (!someone_wins) {
-		      for (i = 0; i < cols; i++) {
+		      for (i = 0; i < 3; i++) {
 		        if (matrix.get(new Point(i,i)).getState() != protenial_winner_state)
 		          break;
 		      }
-		      if (i == cols)
+		      if (i == 3)
 		        someone_wins = true;
 		    }
 
 		    // for inverse diagonal
 		    if (!someone_wins) {
-		      for (i = 0; i < cols; i++) {
-		        if (matrix.get(new Point(i,cols-1-i)).getState() != protenial_winner_state)
+		      for (i = 0; i < 3; i++) {
+		        if (matrix.get(new Point(i,3-1-i)).getState() != protenial_winner_state)
 		          break;
 		      }
-		      if (i == cols)
+		      if (i == 3)
 		        someone_wins = true;
 		    }
 		
@@ -166,6 +166,8 @@ public class TicTacToeTester extends BoardState {
 			}
 			
 		}
+		
+		else if(!someone_wins && (tictactoe.remainCount==0)) 	winner_of_game = Winner.Draw;
 		
 		
 		
@@ -216,7 +218,7 @@ public class TicTacToeTester extends BoardState {
 		cellState current_cell_state_symbol;
 		Player current_player;			//current player or next player?
 		
-		if(tictactoe.turn ==0){
+		if(tictactoe.turn ==1){
 			current_symbol = tictactoe.userSymbol;
 			current_player = Player.First;
 		}else{
@@ -232,23 +234,20 @@ public class TicTacToeTester extends BoardState {
 			current_cell_state_symbol = cellState.Empty;
 		
 		
-		for(int i=0;i<cols;i++){
-			for(int j=0;j<cols;j++){
+		for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++){
 				if(matrix.get(new Point(i,j)).getState() == cellState.Empty){
+					//System.out.println("have a empty pot");
 					Move current_one_possible_move = new Move(current_player, new Cell(i, j, current_cell_state_symbol));
 					possible_move.add(current_one_possible_move);
 				}
-				
-				
-				
-				
 			}
 		}
 		
 		
 		
 		
-		
+		//System.out.println("possible move size" + possible_move.size());
 		
 		
 		
