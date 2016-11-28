@@ -115,6 +115,7 @@ public class TicTacToeTester extends BoardState {
 		else protenial_winner_state = GameConstant.cellState.Circle;
 		
 		
+		System.out.println("remaincount" + tictactoe.remainCount);
 		
 		//for horizontal direction
 		for(i=0;i<3 && !someone_wins;i++){
