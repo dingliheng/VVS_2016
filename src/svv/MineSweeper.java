@@ -149,8 +149,9 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
 
                 int num = (int) Math.pow(i, 2);
                 int num2 = (int) Math.sqrt(num);
+                int num1 = rand.nextInt(10)+num2;
                 int num3 = rand.nextInt(20) + num2;
-                int num4 = (num2+1) * num3;
+                int num4 = (num1+1) * num3;
                 //     double num5 = Math.sqrt(num4);
                 System.out.println("-------- Test " + (i - 4) + "--------");
                 System.out.println("Board Size: " + num);
