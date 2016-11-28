@@ -161,7 +161,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
                 System.out.println("passCases: " + num4);
                 System.out.println("failedCases: " + 0);
                 //   System.out.println("Execution time: "+num5);
-                Thread.sleep(1000);
+                Thread.sleep(1000);//// STOPSHIP: 2016/11/28  
             }catch(InterruptedException ex) {
                 ex.printStackTrace();
             }
