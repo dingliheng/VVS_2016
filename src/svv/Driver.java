@@ -16,31 +16,7 @@ public class Driver {
 		prev.makeMove(_move);
 		return prev;
 	}
-	
-//	static void genTests(String path, BoardState init) throws Exception{
-//		
-//		CellCoverage cc = new CellCoverage(init);
-//		File f = new File(path);
-//		FileWriter fw = new FileWriter(f.getAbsoluteFile());
-//		BufferedWriter bw = new BufferedWriter(fw);
-//		BoardState cur;
-//		while(cc.getCoverage() < 1.0){
-//			cur = init;
-//			while(cur.getWinner() == Winner.Neither){
-//				
-//				List<Move> possibleMoves = cur.getPossibleMove();
-//				Random r = new Random();
-//				int movePicked = r.nextInt(possibleMoves.size());
-//				Move curMove = possibleMoves.get(movePicked);
-//				cur = nextState(cur, curMove);
-//				cc.update(cur);
-//				
-//				bw.write(curMove.toString() + ", " + cur.toString() + "\n");
-//			}
-//			bw.write("\n");
-//		}
-//		bw.close();
-//	}
+
 	
 	static float runTests(GameSocket gs, BoardState bs) throws Exception{
 		
@@ -50,18 +26,19 @@ public class Driver {
 		CellCoverage cc = new CellCoverage(bs.getInitState());
 		BoardState cur;
         int rounds = 0;
+        int passesCases=0;
 		while(cc.getCoverage() < 1.0){
 			cur = bs.getInitState();
 			gs.startNewGame();
 			//System.out.println("point 1");
 			rounds++;
 			
-			System.out.println("winner : " + cur.getWinner());
+			//System.out.println("winner : " + cur.getWinner());
 			
 			while(cur.getWinner() == Winner.Neither){
 				
 				List<Move> possibleMoves = cur.getPossibleMove();
-				System.out.println("possible move size" + possibleMoves.size());
+				//System.out.println("possible move size" + possibleMoves.size());
 				Random r = new Random();
 				int movePicked = r.nextInt(possibleMoves.size());
 				Move curMove = possibleMoves.get(movePicked);
@@ -79,6 +56,7 @@ public class Driver {
 			}
 			
 			totalCases += 1;
+			//System.out.println("is game won "+ );
 			if(cur.getWinner() == gs.getWinner()){
 				passCases += 1;
 			}else {
@@ -86,6 +64,7 @@ public class Driver {
 				Winner winner1 = gs.getWinner();
 				passCases += 0;
 			}
+			passesCases += 1;
 		}
         System.out.println("Rounds: "+rounds);
         System.out.println("totalCases: "+totalCases);
@@ -107,7 +86,7 @@ public class Driver {
            // System.out.println("Empty Slots: "+ emptySlots);
             long start = System.currentTimeMillis();
 //            float testScore = runTests(new SudokuSocket(new SudokuTester(emptySlots)), new SudokuTester(emptySlots));
-            float testScore = runTests(new TicTacToeSocket(new TicTacToeTester('2','x','n')), new TicTacToeTester('2','x','n'));
+            float testScore = runTests(new TicTacToeSocket(new TicTacToeTester('2','x','y')), new TicTacToeTester('2','x','y'));
             long stop = System.currentTimeMillis();
             //System.out.println("Execution time: "+(float)(stop-start)/1000+"s");
             //System.out.println(testScore);

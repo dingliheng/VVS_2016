@@ -10,7 +10,7 @@ import svv.GameConstant.Winner;
 
 public class TicTacToeSocket implements GameSocket{
 	
-	private TicTacToeTester tictactoetester;
+	public TicTacToeTester tictactoetester;
 	
 	
 	
@@ -45,6 +45,9 @@ public class TicTacToeSocket implements GameSocket{
 			
 			
 		}
+		
+		tictactoetester.tictactoe.remainCount = tictactoetester.tictactoe.remainCount - 1 ;
+		//tictactoetester.tictactoe.turn = (tictactoetester.tictactoe.turn + 1) % 2 ;
 		
 		
 		
@@ -82,6 +85,8 @@ public class TicTacToeSocket implements GameSocket{
 		
 		tictactoetester.tictactoe.board[r][l] = current_state;
 		
+		tictactoetester.tictactoe.turn = (tictactoetester.tictactoe.turn + 1) % 2 ;
+		
 		synboard();
 		
 	}
@@ -89,18 +94,39 @@ public class TicTacToeSocket implements GameSocket{
 	@Override
 	public Winner getWinner() {
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		char [][] current_board = tictactoetester.tictactoe.board;
-		int turn_in_get_winner = tictactoetester.tictactoe.turn;
-		char usersym = tictactoetester.tictactoe.userSymbol;
-		char compsym = tictactoetester.tictactoe.compSymbol;
-		boolean is_game_won = tictactoetester.tictactoe.isGameWon(current_board, turn_in_get_winner, usersym, compsym);
+		int turn_in_get_winner = (tictactoetester.turn + 1) % 2;
+		char usersym = 'x';
+		char compsym = 'o';
+		boolean is_game_won = tictactoetester.tictactoe.isGameWon(current_board, turn_in_get_winner, 'x', 'o');
 		
-		if(tictactoetester.tictactoe.remainCount==0){
-		if(!is_game_won){return Winner.Neither;}
-		else if (turn_in_get_winner==0){return Winner.First;}
-		else return Winner.Second;
 		
-		}	else return null;
+		
+		if(is_game_won){
+			if(turn_in_get_winner==3)	return Winner.First;
+			else if(turn_in_get_winner ==4)		return Winner.Second;
+		}
+		return tictactoetester.getWinner();
+	//	else if(tictactoetester.tictactoe.remainCount!=0)	return Winner.Neither;
+	//	else return Winner.Draw;
+		//if((!is_game_won) && (tictactoetester.tictactoe.remainCount!=0)){return Winner.Neither;}
+		//else if((!is_game_won) && (tictactoetester.tictactoe.remainCount==0)) return Winner.Draw;
+		//else if (turn_in_get_winner==0){return Winner.First;}
+		//else  return Winner.Second;
+		//else return Winner.Draw;
+//		return null;
+		
+		
 	
 	}
 

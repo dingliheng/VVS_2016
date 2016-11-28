@@ -4,6 +4,8 @@ package svv;
 
 import java.util.Scanner;
 
+import javax.lang.model.element.Element;
+
 public class TicTacToe_dual
 {
   public static Scanner sc = new Scanner(System.in);
@@ -17,6 +19,11 @@ public class TicTacToe_dual
   public static char[][] board= new char[SIZE][SIZE];
   
   public TicTacToe_dual(){
+	  
+	  
+	  
+	  
+	  
 	  
 		  
 	    resetBoard(); // initialize the board (with ' ' for all cells)
@@ -51,6 +58,13 @@ public class TicTacToe_dual
     numberOfplayer = players;
     userSymbol = _userSymbol;
     ans = goFirst;
+    
+    if(ans == 'y'){turn=0;}
+    else turn=1;
+    
+    
+    
+    
 
   }
   
@@ -131,6 +145,9 @@ public class TicTacToe_dual
   public static void resetBoard()
   {
 	  
+	  remainCount=9;
+	  
+	  
 	  if(userSymbol=='x'){
 			userSymbol = 'o';
 			compSymbol = 'x';
@@ -200,6 +217,9 @@ public class TicTacToe_dual
     }
 
     brd[rowIndex][colIndex] = usym;
+    
+   // remainCount--;
+    
   }
 
   public static void compPlay(char[][] brd, char csym)
@@ -213,6 +233,10 @@ public class TicTacToe_dual
         }
       }
     }
+    
+    //remainCount--;
+    
+    
   }
 
   public static boolean isGameWon(char[][] brd, int turn, char usym, char csym)

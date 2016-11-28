@@ -15,6 +15,8 @@ import svv.GameConstant.cellState;
 
 public class TicTacToeTester extends BoardState {
 	
+	public int turn;
+	
 	
 	public TicTacToe_dual tictactoe;
 	public char[][] myboard;
@@ -24,6 +26,9 @@ public class TicTacToeTester extends BoardState {
 		
 		tictactoe = new TicTacToe_dual(players, _userSymbol, goFirst);
 		myboard = tictactoe.board;
+		
+		if(goFirst=='y'){turn=0;}
+		else turn=1;
 	
 	for(int i =0; i<3; i++){
 		for(int j=0; j<3; j++){
@@ -40,6 +45,8 @@ public class TicTacToeTester extends BoardState {
 	}
 	}
 	
+	
+
 	
 	@Override
 	public boolean isValid() {
@@ -115,7 +122,7 @@ public class TicTacToeTester extends BoardState {
 		else protenial_winner_state = GameConstant.cellState.Circle;
 		
 		
-		System.out.println("remaincount" + tictactoe.remainCount);
+	//	System.out.println("remaincount" + tictactoe.remainCount);
 		
 		//for horizontal direction
 		for(i=0;i<3 && !someone_wins;i++){
@@ -219,7 +226,7 @@ public class TicTacToeTester extends BoardState {
 		cellState current_cell_state_symbol;
 		Player current_player;			//current player or next player?
 		
-		if(tictactoe.turn ==1){
+		if(turn ==1){
 			current_symbol = tictactoe.userSymbol;
 			current_player = Player.First;
 		}else{
@@ -246,7 +253,7 @@ public class TicTacToeTester extends BoardState {
 		}
 		
 		
-		
+		turn = (turn+1)%2;
 		
 		//System.out.println("possible move size" + possible_move.size());
 		
