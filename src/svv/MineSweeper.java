@@ -110,8 +110,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
 //
 //        showTime.setText("已用时：0 秒");
 //        showTime.setBounds(400, 20, 100, 30);
-//        this.add(showTime);
-        printInfo();
+//        this.add(showTime);//  printInfo();
 //        makeMine();
 //        makeButton();
 //        makeArray();
@@ -141,33 +140,7 @@ public class MineSweeper extends JFrame implements ActionListener, Runnable,
 //        mineSweeper.init();
 //        mineSweeper.run();
 //    }
-    public void printInfo(){
-        for(int i = 5; i < 10; i++) {
-            try {
-                Random rand = new Random();
 
-
-                int num = (int) Math.pow(i, 2);
-                int num2 = (int) Math.sqrt(num);
-                int num1 = rand.nextInt(10)+num2;
-                int num3 = rand.nextInt(20) + num2;
-                int num4 = (num1+1) * num3;
-                //     double num5 = Math.sqrt(num4);
-                System.out.println("-------- Test " + (i - 4) + "--------");
-                System.out.println("Board Size: " + num);
-                System.out.println("Mine number: " + num2);
-                System.out.println("Rounds: " + num3);//
-                System.out.println("totalCases: " + num4);
-                System.out.println("passCases: " + num4);
-                System.out.println("failedCases: " + 0);
-                System.out.println();
-                //   System.out.println("Execution time: "+num5);
-                Thread.sleep(1000); 
-            }catch(InterruptedException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
     public void whetherEnable(){
 
         for(int i = 0; i < 10; i++){

@@ -19,44 +19,44 @@ public class MineSweepSocket implements GameSocket {
 		// TODO Auto-generated method stub
 		return mineSweepTester;
 	}
-//	public void synBoard(){
-//		JButton[][] myButton = mineSweepTester.mineSweeper.jb;
-//		int[][] myMap2 = mineSweepTester.mineSweeper.map2;
-//		int[][] myMap3 = mineSweepTester.mineSweeper.map3;
-//		Map matrix=mineSweepTester.matrix;
-//		for (int i=0; i<10 ; i++) {
-//			for(int j=0; j<10; j++) {
-//				//String content = myjb[i][j].getText();
-//				int number = myMap2[i][j];
-//				if(myButton[i][j].isEnabled() && myButton[i][j].getText().equals("")){
-//					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Empty));
-//				}
-//				if(number == 9){
-//					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Nine));
-//				}else{
-//					if(number == 0){
-//						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Zero));
-//					}else if(number == 1){
-//						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.One));
-//					}else if(number == 2){
-//						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Two));
-//					}else if(number == 3){
-//						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Three));
-//					}else if(number == 4){
-//						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Four));
-//					}else if(number == 5){
-//						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Five));
-//					}else if(number == 6){
-//						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Six));
-//					}else if(number == 7){
-//						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Seven));
-//					}else if(number == 8){
-//						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Eight));
-//					}
-//				}
-//			}
-//		}
-//	}
+	public void synBoard(){
+		JButton[][] myButton = mineSweepTester.mineSweeper.jb;
+		int[][] myMap2 = mineSweepTester.mineSweeper.map2;
+		int[][] myMap3 = mineSweepTester.mineSweeper.map3;
+		Map matrix=mineSweepTester.matrix;
+		for (int i=0; i<10 ; i++) {
+			for(int j=0; j<10; j++) {
+				//String content = myjb[i][j].getText();
+				int number = myMap2[i][j];
+				if(myButton[i][j].isEnabled() && myButton[i][j].getText().equals("")){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Empty));
+				}
+				if(number == 9){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Nine));
+				}else{
+					if(number == 0){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Zero));
+					}else if(number == 1){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.One));
+					}else if(number == 2){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Two));
+					}else if(number == 3){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Three));
+					}else if(number == 4){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Four));
+					}else if(number == 5){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Five));
+					}else if(number == 6){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Six));
+					}else if(number == 7){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Seven));
+					}else if(number == 8){
+						matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Eight));
+					}
+				}
+			}
+		}
+	}
 
 
 	@Override

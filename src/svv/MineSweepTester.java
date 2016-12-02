@@ -27,9 +27,9 @@ public class MineSweepTester extends BoardState{
 			for(int j=0; j<10; j++) {
 				//String content = myjb[i][j].getText();
 				int num2 = mymap2[i][j];
-//				if(myjb[i][j].isEnabled() && myjb[i][j].getText().equals("")){
-//					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Empty));
-//				}
+				if(myjb[i][j].isEnabled() && myjb[i][j].getText().equals("")){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Empty));
+				}
 				if(num2 == 9){
 					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Nine));
 				}else{
@@ -114,9 +114,9 @@ public class MineSweepTester extends BoardState{
 			for(int j=0; j<10; j++) {
 				//String content = myjb[i][j].getText();
 				int num2 = mymap2[i][j];
-//				if(myjb[i][j].isEnabled() && myjb[i][j].getText().equals("")){
-//					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Empty));
-//				}
+				if(myjb[i][j].isEnabled() && myjb[i][j].getText().equals("")){
+					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Empty));
+				}
 				if(num2 == 9){
 					matrix.put(new Point(i,j),new Cell(i,j, GameConstant.cellState.Nine));
 				}else{
