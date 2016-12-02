@@ -9,12 +9,12 @@ import svv.GameConstant.Winner;
 
 public class MineSweepSocket implements GameSocket {
 	private MineSweepTester mineSweepTester;
-//	public MineSweepSocket(){
-//		mineSweepTester = new MineSweepTester();
-//	}
-//	public MineSweepSocket(MineSweeper _mineSweeper){
-//		mineSweepTester = new MineSweepTester(_mineSweeper);
-//	}
+	public MineSweepSocket(){
+		mineSweepTester = new MineSweepTester();
+	}
+	public MineSweepSocket(MineSweeper _mineSweeper){
+		mineSweepTester = new MineSweepTester(_mineSweeper);
+	}
 	public BoardState getBoard() {
 		// TODO Auto-generated method stub
 		return mineSweepTester;
